@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "companies",
+  "info": {
+    "singularName": "company",
+    "pluralName": "companies",
+    "displayName": "Company"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "logo": {
+      "type": "text"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "company_category": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::company-category.company-category"
+    }
+  }
+}

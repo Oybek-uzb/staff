@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "agent_statuses",
+  "info": {
+    "singularName": "agent-status",
+    "pluralName": "agent-statuses",
+    "displayName": "agent-status"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "name": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    }
+  }
+}

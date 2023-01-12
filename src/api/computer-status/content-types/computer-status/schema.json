@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "computer_statuses",
+  "info": {
+    "singularName": "computer-status",
+    "pluralName": "computer-statuses",
+    "displayName": "computer-status"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "name": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    }
+  }
+}

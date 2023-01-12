@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "attandances",
+  "info": {
+    "singularName": "attandance",
+    "pluralName": "attandances",
+    "displayName": "attandance"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "check_in": {
+      "type": "datetime"
+    },
+    "check_out": {
+      "type": "datetime"
+    },
+    "company": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::company.company"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    }
+  }
+}

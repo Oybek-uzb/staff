@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "computer_sessions",
+  "info": {
+    "singularName": "computer-session",
+    "pluralName": "computer-sessions",
+    "displayName": "computer-session"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "session_start": {
+      "type": "datetime"
+    },
+    "session_end": {
+      "type": "datetime"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "computer": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::computer.computer"
+    },
+    "company": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::company.company"
+    }
+  }
+}

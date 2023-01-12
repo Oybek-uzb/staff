@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "printings",
+  "info": {
+    "singularName": "printing",
+    "pluralName": "printings",
+    "displayName": "printing"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "file_name": {
+      "type": "text"
+    },
+    "file_path": {
+      "type": "text"
+    },
+    "printed_pages_numb": {
+      "type": "integer"
+    },
+    "printer_name": {
+      "type": "string"
+    },
+    "company": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::company.company"
+    },
+    "computer": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::computer.computer"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    }
+  }
+}

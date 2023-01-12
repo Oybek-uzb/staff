@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "programs",
+  "info": {
+    "singularName": "program",
+    "pluralName": "programs",
+    "displayName": "program"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "productivity_category": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::productivity-category.productivity-category"
+    }
+  }
+}
