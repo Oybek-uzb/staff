@@ -1,0 +1,12 @@
+{
+  "servers": [
+    {
+      "url": "http://localhost:1337/api",
+      "description": "Development server"
+    },
+    {
+      "url": "http://128.199.195.39:1337/api",
+      "description": "Prod server"
+    }
+  ]
+}
