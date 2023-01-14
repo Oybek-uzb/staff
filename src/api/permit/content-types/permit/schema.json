@@ -4,7 +4,8 @@
   "info": {
     "singularName": "permit",
     "pluralName": "permits",
-    "displayName": "permit"
+    "displayName": "permit",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -52,10 +53,10 @@
       "relation": "oneToOne",
       "target": "api::company.company"
     },
-    "responsible_user": {
+    "employee": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "plugin::users-permissions.user"
+      "target": "api::employee.employee"
     }
   }
 }

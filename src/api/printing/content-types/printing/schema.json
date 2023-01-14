@@ -4,7 +4,8 @@
   "info": {
     "singularName": "printing",
     "pluralName": "printings",
-    "displayName": "printing"
+    "displayName": "printing",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -33,10 +34,10 @@
       "relation": "oneToOne",
       "target": "api::computer.computer"
     },
-    "user": {
+    "employee": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "plugin::users-permissions.user"
+      "target": "api::employee.employee"
     }
   }
 }

@@ -4,7 +4,8 @@
   "info": {
     "singularName": "computer",
     "pluralName": "computers",
-    "displayName": "computer"
+    "displayName": "computer",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -20,15 +21,15 @@
     "os": {
       "type": "string"
     },
-    "user": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "plugin::users-permissions.user"
-    },
     "computer_status": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::computer-status.computer-status"
+    },
+    "employee": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employee.employee"
     }
   }
 }

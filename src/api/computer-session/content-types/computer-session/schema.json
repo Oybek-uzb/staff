@@ -4,7 +4,8 @@
   "info": {
     "singularName": "computer-session",
     "pluralName": "computer-sessions",
-    "displayName": "computer-session"
+    "displayName": "computer-session",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -17,11 +18,6 @@
     "session_end": {
       "type": "datetime"
     },
-    "user": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "plugin::users-permissions.user"
-    },
     "computer": {
       "type": "relation",
       "relation": "oneToOne",
@@ -31,6 +27,11 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::company.company"
+    },
+    "employee": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employee.employee"
     }
   }
 }

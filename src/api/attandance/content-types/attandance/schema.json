@@ -4,7 +4,8 @@
   "info": {
     "singularName": "attandance",
     "pluralName": "attandances",
-    "displayName": "attandance"
+    "displayName": "attandance",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -22,10 +23,10 @@
       "relation": "oneToOne",
       "target": "api::company.company"
     },
-    "user": {
+    "employee": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "plugin::users-permissions.user"
+      "target": "api::employee.employee"
     }
   }
 }

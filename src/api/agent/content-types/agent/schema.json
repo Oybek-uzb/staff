@@ -4,7 +4,8 @@
   "info": {
     "singularName": "agent",
     "pluralName": "agents",
-    "displayName": "agent"
+    "displayName": "agent",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -16,11 +17,6 @@
     },
     "version": {
       "type": "string"
-    },
-    "user": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "plugin::users-permissions.user"
     },
     "company": {
       "type": "relation",
@@ -36,6 +32,11 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::computer.computer"
+    },
+    "employee": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employee.employee"
     }
   }
 }
