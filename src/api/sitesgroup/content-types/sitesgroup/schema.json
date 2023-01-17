@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sitesgroups",
+  "info": {
+    "singularName": "sitesgroup",
+    "pluralName": "sitesgroups",
+    "displayName": "sitesgroup"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "sites": {
+      "type": "json"
+    },
+    "useful": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

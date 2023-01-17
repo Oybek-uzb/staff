@@ -30,6 +30,26 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::employee.employee"
+    },
+    "agentVersion": {
+      "type": "string"
+    },
+    "isMonitored": {
+      "type": "boolean",
+      "default": false
+    },
+    "isOnline": {
+      "type": "boolean",
+      "default": false
+    },
+    "pcId": {
+      "type": "string"
+    },
+    "pcName": {
+      "type": "string"
+    },
+    "dateTime": {
+      "type": "datetime"
     }
   }
 }

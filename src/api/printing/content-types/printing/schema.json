@@ -12,16 +12,16 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "file_name": {
+    "fileName": {
       "type": "text"
     },
-    "file_path": {
+    "filePath": {
       "type": "text"
     },
-    "printed_pages_numb": {
+    "pagesCount": {
       "type": "integer"
     },
-    "printer_name": {
+    "printerName": {
       "type": "string"
     },
     "company": {
@@ -38,6 +38,16 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::employee.employee"
+    },
+    "copies": {
+      "type": "integer"
+    },
+    "isIncident": {
+      "type": "boolean",
+      "default": false
+    },
+    "dateTime": {
+      "type": "datetime"
     }
   }
 }

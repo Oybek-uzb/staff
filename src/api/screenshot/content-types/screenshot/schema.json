@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "screenshots",
+  "info": {
+    "singularName": "screenshot",
+    "pluralName": "screenshots",
+    "displayName": "screenshot"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "activeWindowName": {
+      "type": "text"
+    },
+    "computer": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::computer.computer"
+    },
+    "employee": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employee.employee"
+    },
+    "imageUrl": {
+      "type": "text"
+    },
+    "dateTime": {
+      "type": "datetime"
+    }
+  }
+}

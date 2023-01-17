@@ -1,0 +1,56 @@
+{
+  "kind": "collectionType",
+  "collectionName": "emails",
+  "info": {
+    "singularName": "email",
+    "pluralName": "emails",
+    "displayName": "email"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "computer": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::computer.computer"
+    },
+    "employee": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employee.employee"
+    },
+    "dateTime": {
+      "type": "string"
+    },
+    "files": {
+      "type": "json"
+    },
+    "from": {
+      "type": "text"
+    },
+    "guid": {
+      "type": "string"
+    },
+    "host": {
+      "type": "string"
+    },
+    "isIncident": {
+      "type": "boolean",
+      "default": false
+    },
+    "message": {
+      "type": "text"
+    },
+    "protocol": {
+      "type": "string"
+    },
+    "subject": {
+      "type": "string"
+    },
+    "to": {
+      "type": "text"
+    }
+  }
+}

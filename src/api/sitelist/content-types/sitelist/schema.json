@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sitelists",
+  "info": {
+    "singularName": "sitelist",
+    "pluralName": "sitelists",
+    "displayName": "sitelist"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "hostname": {
+      "type": "text"
+    }
+  }
+}

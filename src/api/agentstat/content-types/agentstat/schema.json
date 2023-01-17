@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "agentstats",
+  "info": {
+    "singularName": "agentstat",
+    "pluralName": "agentstats",
+    "displayName": "agentstat"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "computer": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::computer.computer"
+    },
+    "employee": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employee.employee"
+    },
+    "dataSniffTime": {
+      "type": "string"
+    },
+    "lastDataReceiveTime": {
+      "type": "string"
+    },
+    "moduleName": {
+      "type": "string"
+    }
+  }
+}

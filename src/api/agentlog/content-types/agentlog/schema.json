@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "agentlogs",
+  "info": {
+    "singularName": "agentlog",
+    "pluralName": "agentlogs",
+    "displayName": "agentlog"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "computer": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::computer.computer"
+    },
+    "employee": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employee.employee"
+    },
+    "dateTime": {
+      "type": "string"
+    },
+    "function": {
+      "type": "string"
+    },
+    "message": {
+      "type": "text"
+    },
+    "module": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "error": {
+      "type": "text"
+    }
+  }
+}

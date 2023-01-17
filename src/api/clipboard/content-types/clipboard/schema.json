@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "clipboards",
+  "info": {
+    "singularName": "clipboard",
+    "pluralName": "clipboards",
+    "displayName": "clipboard",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "computer": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::computer.computer"
+    },
+    "employee": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employee.employee"
+    },
+    "content": {
+      "type": "string"
+    },
+    "dataUrl": {
+      "type": "text"
+    },
+    "guid": {
+      "type": "text"
+    },
+    "isIncident": {
+      "type": "boolean",
+      "default": false
+    },
+    "source": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "dateTime": {
+      "type": "datetime"
+    }
+  }
+}

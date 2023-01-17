@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "websearches",
+  "info": {
+    "singularName": "websearch",
+    "pluralName": "websearches",
+    "displayName": "websearch"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "computer": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::computer.computer"
+    },
+    "employee": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employee.employee"
+    },
+    "browser": {
+      "type": "string"
+    },
+    "dateTime": {
+      "type": "datetime"
+    },
+    "host": {
+      "type": "string"
+    },
+    "protocol": {
+      "type": "string"
+    },
+    "text": {
+      "type": "text"
+    }
+  }
+}

@@ -4,7 +4,8 @@
   "info": {
     "singularName": "program",
     "pluralName": "programs",
-    "displayName": "program"
+    "displayName": "program",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -18,6 +19,37 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::productivity-category.productivity-category"
+    },
+    "author": {
+      "type": "text"
+    },
+    "employee": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employee.employee"
+    },
+    "computer": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::computer.computer"
+    },
+    "installLocation": {
+      "type": "text"
+    },
+    "size": {
+      "type": "biginteger"
+    },
+    "status": {
+      "type": "string"
+    },
+    "uninstallPath": {
+      "type": "text"
+    },
+    "installingDate": {
+      "type": "datetime"
+    },
+    "version": {
+      "type": "string"
     }
   }
 }

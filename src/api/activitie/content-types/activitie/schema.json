@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "activities",
+  "info": {
+    "singularName": "activitie",
+    "pluralName": "activities",
+    "displayName": "activitie",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "allActiveTime": {
+      "type": "biginteger"
+    },
+    "allWebTime": {
+      "type": "biginteger"
+    },
+    "dateTimeStr": {
+      "type": "string"
+    },
+    "efficiencyProcTime": {
+      "type": "biginteger"
+    },
+    "efficiencyWebTime": {
+      "type": "biginteger"
+    },
+    "employee": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employee.employee"
+    },
+    "dateTime": {
+      "type": "datetime"
+    }
+  }
+}

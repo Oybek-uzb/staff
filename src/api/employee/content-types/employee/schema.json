@@ -4,16 +4,14 @@
   "info": {
     "singularName": "employee",
     "pluralName": "employees",
-    "displayName": "employee"
+    "displayName": "employee",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "fullname": {
-      "type": "text"
-    },
     "user": {
       "type": "relation",
       "relation": "oneToOne",
@@ -28,6 +26,59 @@
       "type": "string"
     },
     "phone": {
+      "type": "string"
+    },
+    "is_online": {
+      "type": "boolean",
+      "default": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "group": {
+      "type": "text"
+    },
+    "hostname": {
+      "type": "string"
+    },
+    "is_agent_installed": {
+      "type": "boolean",
+      "default": false
+    },
+    "last_computer": {
+      "type": "string"
+    },
+    "last_seen": {
+      "type": "string"
+    },
+    "rule": {
+      "type": "string"
+    },
+    "sid": {
+      "type": "text"
+    },
+    "tg_account": {
+      "type": "string"
+    },
+    "token": {
+      "type": "text"
+    },
+    "get_name_from_ad": {
+      "type": "boolean",
+      "default": false
+    },
+    "is_not_license": {
+      "type": "boolean",
+      "default": false
+    },
+    "position": {
+      "type": "string"
+    },
+    "first_name": {
+      "type": "string"
+    },
+    "last_name": {
       "type": "string"
     }
   }
