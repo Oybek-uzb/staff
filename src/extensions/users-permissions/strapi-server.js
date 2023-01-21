@@ -1,3 +1,7 @@
+const service = require('./service')
+const { register } = service
+
+
 const sanitizeOutput = (user) => {
   const {
     password, resetPasswordToken, confirmationToken, ...sanitizedUser
@@ -18,6 +22,6 @@ module.exports = (plugin) => {
     );
     ctx.body = sanitizeOutput(user);
   }
-
+  plugin.controllers.auth.register = register
   return plugin;
 }
