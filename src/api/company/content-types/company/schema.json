@@ -44,10 +44,17 @@
       "relation": "oneToOne",
       "target": "api::subscribe-type.subscribe-type"
     },
+    "employees": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::employee.employee",
+      "mappedBy": "company"
+    },
     "user": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "plugin::users-permissions.user"
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "company"
     }
   }
 }
