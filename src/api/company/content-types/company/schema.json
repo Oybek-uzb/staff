@@ -33,6 +33,16 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::country.country"
+    },
+    "card": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::card.card"
+    },
+    "subscribe_type": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::subscribe-type.subscribe-type"
     }
   }
 }
