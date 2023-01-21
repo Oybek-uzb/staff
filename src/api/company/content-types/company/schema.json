@@ -43,6 +43,11 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::subscribe-type.subscribe-type"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
     }
   }
 }
