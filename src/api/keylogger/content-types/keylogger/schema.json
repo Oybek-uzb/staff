@@ -4,7 +4,8 @@
   "info": {
     "singularName": "keylogger",
     "pluralName": "keyloggers",
-    "displayName": "keylogger"
+    "displayName": "keylogger",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -39,6 +40,9 @@
     "isIncident": {
       "type": "boolean",
       "default": false
+    },
+    "content": {
+      "type": "richtext"
     }
   }
 }

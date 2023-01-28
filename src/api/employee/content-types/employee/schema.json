@@ -28,7 +28,7 @@
     "phone": {
       "type": "string"
     },
-    "is_online": {
+    "isOnline": {
       "type": "boolean",
       "default": false
     },
@@ -42,14 +42,14 @@
     "hostname": {
       "type": "string"
     },
-    "is_agent_installed": {
+    "isAgentInstalled": {
       "type": "boolean",
       "default": false
     },
-    "last_computer": {
+    "lastComputer": {
       "type": "string"
     },
-    "last_seen": {
+    "lastSeen": {
       "type": "string"
     },
     "rule": {
@@ -64,27 +64,40 @@
     "token": {
       "type": "text"
     },
-    "get_name_from_ad": {
+    "getNameFromAd": {
       "type": "boolean",
       "default": false
     },
-    "is_not_license": {
+    "isNotLicense": {
       "type": "boolean",
       "default": false
     },
     "position": {
       "type": "string"
     },
-    "first_name": {
+    "firstName": {
       "type": "string"
     },
-    "last_name": {
+    "lastName": {
       "type": "string"
     },
     "company": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::company.company",
+      "inversedBy": "employees"
+    },
+    "userID": {
+      "type": "text"
+    },
+    "inDomain": {
+      "type": "boolean",
+      "default": false
+    },
+    "computer": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::computer.computer",
       "inversedBy": "employees"
     }
   }

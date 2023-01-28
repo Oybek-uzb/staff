@@ -12,9 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "datetime": {
-      "type": "string"
-    },
     "icon": {
       "type": "text"
     },
@@ -36,6 +33,9 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::computer.computer"
+    },
+    "dateTime": {
+      "type": "datetime"
     }
   }
 }

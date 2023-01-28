@@ -26,10 +26,11 @@
       "relation": "oneToOne",
       "target": "api::computer-status.computer-status"
     },
-    "employee": {
+    "employees": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::employee.employee"
+      "relation": "oneToMany",
+      "target": "api::employee.employee",
+      "mappedBy": "computer"
     },
     "agentVersion": {
       "type": "string"
