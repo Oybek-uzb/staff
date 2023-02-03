@@ -76,10 +76,12 @@
       "type": "string"
     },
     "firstName": {
-      "type": "string"
+      "type": "string",
+      "required": false
     },
     "lastName": {
-      "type": "string"
+      "type": "string",
+      "required": false
     },
     "company": {
       "type": "relation",
@@ -99,6 +101,11 @@
       "relation": "manyToOne",
       "target": "api::computer.computer",
       "inversedBy": "employees"
+    },
+    "hikvision": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::hikvision.hikvision"
     }
   }
 }

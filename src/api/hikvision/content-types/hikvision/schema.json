@@ -4,7 +4,8 @@
   "info": {
     "singularName": "hikvision",
     "pluralName": "hikvisions",
-    "displayName": "hikvision"
+    "displayName": "hikvision",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -31,6 +32,9 @@
       "target": "api::device-type.device-type"
     },
     "hikvision_key": {
+      "type": "string"
+    },
+    "password": {
       "type": "string"
     }
   }

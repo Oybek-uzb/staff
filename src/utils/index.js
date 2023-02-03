@@ -25,7 +25,7 @@ const formatFileInfo = async function(file) {
 
 
 
-const customError = (ctx, log) => {
+const customError = (ctx, log, status) => {
   return ctx.send({
     success: false,
     message: log
@@ -62,16 +62,18 @@ async function uploadStream(file, folder) {
   const _uploadPath = path.resolve(strapi.dirs.static.public, `${UPLOADS_FOLDER_NAME + '/' + folder}`);
   const _file = await formatFileInfo(file)
   const _file_hash = `${_file.name}-${Date.now()}${_file.ext}`
+  // const _fileStream = fs.createWriteStream()
   return new Promise( (resolve, reject) => {
     pipeline(
       _file.stream,
       fs.createWriteStream(path.join(_uploadPath, _file_hash)),
       async (err) => {
         if (err) return reject(err);
-        delete file.stream
+        // delete _file.stream
 
-        file.url = `/${folder}/${_file_hash}`;
-        resolve(file);
+        _file.url = `/${folder}/${_file_hash}`;
+        _file.full_path = path.join(_uploadPath, _file_hash);
+        resolve(_file);
       }
     );
   });

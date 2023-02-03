@@ -5,13 +5,9 @@
  */
 
 const {createCoreController} = require('@strapi/strapi').factories;
-const customError = (ctx, log) => {
-  return ctx.send({
-    success: false,
-    message: log
-  }, 400);
-}
 
+const utils = require('../../../utils')
+const { customError } = utils
 const jwt = require('jsonwebtoken');
 
 module.exports = createCoreController('api::computer.computer', ({strapi}) => ({
@@ -76,6 +72,7 @@ module.exports = createCoreController('api::computer.computer', ({strapi}) => ({
             inDomain: InDomain
           }
         })
+        // const _token = await parseJwt(authorization, ctx)
         const _token = jwt.sign({ id: _employee.id }, strapi.config.get('plugin.users-permissions.jwtSecret'), {expiresIn: 60 * 6000});
         _employee = await strapi.entityService.update('api::employee.employee', _employee.id, {
           data: { token: _token }
