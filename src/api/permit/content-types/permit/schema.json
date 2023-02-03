@@ -12,38 +12,38 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "guest_name": {
+    "guestName": {
       "type": "string"
     },
-    "visit_purpose": {
+    "visitPurpose": {
       "type": "string"
     },
-    "check_in": {
+    "checkIn": {
       "type": "datetime"
     },
-    "check_out": {
+    "checkOut": {
       "type": "datetime"
     },
-    "qr_code_path": {
+    "qrCodePath": {
       "type": "text"
     },
     "code": {
       "type": "string"
     },
-    "guest_doc_id": {
+    "guestDocId": {
       "type": "string"
     },
     "phone": {
       "type": "string"
     },
-    "expired_date": {
+    "expiredDate": {
       "type": "datetime"
     },
-    "is_onetime": {
+    "isOneTime": {
       "type": "boolean",
       "default": false
     },
-    "doc_type": {
+    "docType": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::doc-type.doc-type"
@@ -57,6 +57,21 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::employee.employee"
+    },
+    "whoVisit": {
+      "type": "string"
+    },
+    "passportSerie": {
+      "type": "string"
+    },
+    "passportNo": {
+      "type": "string"
+    },
+    "passportDate": {
+      "type": "string"
+    },
+    "passportRegion": {
+      "type": "string"
     }
   }
 }
