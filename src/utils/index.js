@@ -1,7 +1,8 @@
 const fs = require("fs");
 const path = require("path");
 const { extension } = require('mime-types');
-const {pipeline} = require("stream");
+const { pipeline } = require("stream");
+const jwt = require('jsonwebtoken');
 const uploadPath = path.resolve(strapi.dirs.static.public, 'uploads');
 const UPLOADS_FOLDER_NAME = 'uploads'
 
@@ -33,19 +34,26 @@ const customError = (ctx, log, status) => {
 }
 
 
+// async function parseJwt (token, ctx) {
+//   try {
+//     let base64Url = token.split('.')[1];
+//     let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+//     let jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+//       return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+//     }).join(''));
+//     return JSON.parse(jsonPayload);
+//   } catch (e) {
+//     return customError(ctx, e.message)
+//   }
+// }
 async function parseJwt (token, ctx) {
   try {
-    let base64Url = token.split('.')[1];
-    let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    let jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
-    return JSON.parse(jsonPayload);
+    const _ = jwt.verify(token, strapi.config.get('plugin.users-permissions.jwtSecret'))
+    return _
   } catch (e) {
     return customError(ctx, e.message)
   }
 }
-
 
 async function uploader (base64) {
   const base64Data = base64.replace("data:image/png;base64,", "");

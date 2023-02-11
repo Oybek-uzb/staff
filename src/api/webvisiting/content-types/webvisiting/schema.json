@@ -4,7 +4,8 @@
   "info": {
     "singularName": "webvisiting",
     "pluralName": "webvisitings",
-    "displayName": "webvisiting"
+    "displayName": "webvisiting",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -18,11 +19,6 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::employee.employee"
-    },
-    "computer": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::computer.computer"
     },
     "dateTime": {
       "type": "datetime"

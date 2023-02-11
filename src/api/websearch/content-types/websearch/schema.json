@@ -4,18 +4,14 @@
   "info": {
     "singularName": "websearch",
     "pluralName": "websearches",
-    "displayName": "websearch"
+    "displayName": "websearch",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "computer": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::computer.computer"
-    },
     "employee": {
       "type": "relation",
       "relation": "oneToOne",
@@ -28,9 +24,6 @@
       "type": "datetime"
     },
     "host": {
-      "type": "string"
-    },
-    "protocol": {
       "type": "string"
     },
     "text": {

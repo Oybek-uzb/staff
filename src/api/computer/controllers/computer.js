@@ -53,12 +53,14 @@ module.exports = createCoreController('api::computer.computer', ({strapi}) => ({
       let isUpdated
 
       if (employee[0]) {
+        const _token = jwt.sign({ id: employee[0].id }, strapi.config.get('plugin.users-permissions.jwtSecret'));
         _employee = await strapi.entityService.update('api::employee.employee', employee[0].id, {
           data: {
             firstName: GivenName,
             lastName: SureName,
             hostname: HostName,
-            inDomain: InDomain
+            inDomain: InDomain,
+            token: _token
           },
         });
         isUpdated = true
@@ -73,7 +75,7 @@ module.exports = createCoreController('api::computer.computer', ({strapi}) => ({
           }
         })
         // const _token = await parseJwt(authorization, ctx)
-        const _token = jwt.sign({ id: _employee.id }, strapi.config.get('plugin.users-permissions.jwtSecret'), {expiresIn: 60 * 6000});
+        const _token = jwt.sign({ id: _employee.id }, strapi.config.get('plugin.users-permissions.jwtSecret'));
         _employee = await strapi.entityService.update('api::employee.employee', _employee.id, {
           data: { token: _token }
         })

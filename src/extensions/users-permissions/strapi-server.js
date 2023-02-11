@@ -1,6 +1,6 @@
 const service = require('./service')
 const { register } = service
-
+const socket = require('../socket')
 
 const sanitizeOutput = (user) => {
   const {
