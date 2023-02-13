@@ -31,7 +31,6 @@ module.exports = createCoreController('api::keylogger.keylogger', ({strapi}) => 
 
     const _data = {
       dateTime: DateTime,
-      computer: employee.computer.id,
       employee: _token.id,
       title: Title,
       content: Content,

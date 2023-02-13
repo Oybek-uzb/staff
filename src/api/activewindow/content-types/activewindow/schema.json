@@ -29,11 +29,6 @@
       "relation": "oneToOne",
       "target": "api::employee.employee"
     },
-    "computer": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::computer.computer"
-    },
     "dateTime": {
       "type": "datetime"
     }

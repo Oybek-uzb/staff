@@ -15,11 +15,6 @@
     "activeWindowName": {
       "type": "text"
     },
-    "computer": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::computer.computer"
-    },
     "employee": {
       "type": "relation",
       "relation": "oneToOne",

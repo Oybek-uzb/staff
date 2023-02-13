@@ -32,7 +32,6 @@ module.exports = createCoreController('api::activewindow.activewindow', ({strapi
 
     const _data = {
       dateTime: DateTime,
-      computer: employee.computer.id,
       employee: _token.id,
       title: Title,
       time: ActiveTime,

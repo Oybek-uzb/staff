@@ -4,7 +4,8 @@
   "info": {
     "singularName": "screenshot",
     "pluralName": "screenshots",
-    "displayName": "screenshot"
+    "displayName": "screenshot",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -13,11 +14,6 @@
   "attributes": {
     "activeWindowName": {
       "type": "text"
-    },
-    "computer": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::computer.computer"
     },
     "employee": {
       "type": "relation",
