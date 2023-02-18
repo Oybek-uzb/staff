@@ -7,12 +7,33 @@ const io = require('socket.io')(strapi.server.httpServer, {
     credentials: true
   }
 })
+
+
+const { parseJwt } = require('../../utils')
 let _ = null
 io.on('connection', function (socket) {
   _ = socket
-
+  const customError = (log) => {
+    socket.emit('error', {
+      success: false,
+      message: log
+    })
+  }
   socket.on('hi', async (data) => {
     socket.emit('message', 'Salom alekum')
+  })
+  socket.on('auth', async (data) => {
+    try {
+      const { token } = data
+      const _token = await parseJwt(token)
+      if (!_token) return customError('Token is invalid')
+      // const employee = await strapi.entityService.findOne('api::employee.employee', _token.id, {
+      //   populate: '*'
+      // });
+      socket.emit('message', _)
+    } catch (e) {
+      customError(e)
+    }
   })
 
   // socket.on("joinRoom", async ({ username, room }) => {
