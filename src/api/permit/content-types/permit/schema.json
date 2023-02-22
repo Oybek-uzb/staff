@@ -18,17 +18,8 @@
     "visitPurpose": {
       "type": "string"
     },
-    "checkIn": {
-      "type": "datetime"
-    },
-    "checkOut": {
-      "type": "datetime"
-    },
-    "qrCodePath": {
+    "qrCode": {
       "type": "text"
-    },
-    "code": {
-      "type": "string"
     },
     "guestDocId": {
       "type": "string"
@@ -58,9 +49,6 @@
       "relation": "oneToOne",
       "target": "api::employee.employee"
     },
-    "whoVisit": {
-      "type": "string"
-    },
     "passportSerie": {
       "type": "string"
     },
@@ -72,6 +60,14 @@
     },
     "passportRegion": {
       "type": "string"
+    },
+    "responsiblePerson": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employee.employee"
+    },
+    "startDate": {
+      "type": "datetime"
     }
   }
 }

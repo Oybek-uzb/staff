@@ -23,6 +23,11 @@
         }
       },
       "type": "string"
+    },
+    "parent": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::productivity-category.productivity-category"
     }
   }
 }

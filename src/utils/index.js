@@ -30,7 +30,7 @@ const customError = (ctx, log, status) => {
   return ctx.send({
     success: false,
     message: log
-  }, 400);
+  }, status || 400);
 }
 
 

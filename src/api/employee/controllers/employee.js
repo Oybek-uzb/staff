@@ -7,6 +7,7 @@
 const {createCoreController} = require('@strapi/strapi').factories;
 const DigestFetch = require('digest-fetch')
 const fs = require('fs')
+const moment = require('moment')
 // const AxiosDigestAuth = require('@mhoc/axios-digest-auth').default
 // const fetch = require('node-fetch')
 // const { FormData } = fetch
@@ -49,18 +50,20 @@ module.exports = createCoreController('api::employee.employee', ({strapi}) => ({
     const _ = {
       UserInfo: {
         employeeNo: `emp${id}`,
-        name: `${firstName} ${lastName}`,
+        name: `${firstName} ${lastName ? lastName : ''}`,
         userType: "normal",
         Valid: {
           enable: true,
-          beginTime: beginTime ? new Date(beginTime).toISOString().slice(0, -5) : "2023-01-01T00:00:00",
-          endTime: endTime ? new Date(endTime).toISOString().slice(0, -5) : "2024-01-01T00:00:00"
+          beginTime: beginTime ? new Date(moment(beginTime).add(5, 'hours')).toISOString().slice(0, -5) : "2023-01-01T00:00:00",
+          endTime: endTime ? new Date(moment(endTime).add(5, 'hours')).toISOString().slice(0, -5) : "2024-01-01T00:00:00"
         }
       }
     }
+    console.log(_)
     try {
       const client = new DigestFetch('admin', hikvision.password)
-      const _url = `${hikvision.ip}/ISAPI/AccessControl/UserInfo/${isEdit ? 'Modify' : 'Record'}?format=json`
+      const _url = `http://${hikvision.ip}/ISAPI/AccessControl/UserInfo/${isEdit ? 'Modify' : 'Record'}?format=json`
+      console.log(_url)
       const _req = await client.fetch(_url, {
         method: isEdit ? 'PUT' : 'POST',
         body: JSON.stringify(_),
@@ -74,7 +77,6 @@ module.exports = createCoreController('api::employee.employee', ({strapi}) => ({
     } catch (e) {
       return customError(ctx, e, 500)
     }
-
   },
   async removeHikVisionEmployee(ctx) {
     const params = {...ctx.request.params}
@@ -142,7 +144,7 @@ module.exports = createCoreController('api::employee.employee', ({strapi}) => ({
 
     try {
       const client = new DigestFetch('admin', _employee.hikvision.password)
-      const _url = `${_employee.hikvision.ip}/ISAPI/AccessControl/AcsEvent?format=json`
+      const _url = `http://${_employee.hikvision.ip}/ISAPI/AccessControl/AcsEvent?format=json`
       const _req = await client.fetch(_url, {
         method: 'POST',
         body: JSON.stringify(_),
@@ -150,7 +152,13 @@ module.exports = createCoreController('api::employee.employee', ({strapi}) => ({
       })
       const _data = await _req.json()
       if (_data.errorCode) return customError(ctx, _data, 400)
-      return _data['AcsEvent']
+      const _InfoList = _data['AcsEvent']['InfoList']
+      // for await (const emp of _InfoList) {
+      //   const _employee = await strapi.entityService.findOne('api::employee.employee',emp , {
+      //     populate: '*'
+      //   });
+      // }
+      return { data: _InfoList }
     } catch (e) {
       return customError(ctx, e, 500)
     }
