@@ -141,10 +141,12 @@ module.exports = createCoreController('api::employee.employee', ({strapi}) => ({
         "employeeNoString": `emp${employee}`
       }
     }
+    console.log(_)
 
     try {
       const client = new DigestFetch('admin', _employee.hikvision.password)
       const _url = `http://${_employee.hikvision.ip}/ISAPI/AccessControl/AcsEvent?format=json`
+      console.log(_url)
       const _req = await client.fetch(_url, {
         method: 'POST',
         body: JSON.stringify(_),

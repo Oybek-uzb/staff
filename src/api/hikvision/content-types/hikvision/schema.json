@@ -36,6 +36,18 @@
     },
     "password": {
       "type": "string"
+    },
+    "backUpCount": {
+      "type": "biginteger",
+      "default": "0"
+    },
+    "backUpPage": {
+      "type": "integer",
+      "default": 0
+    },
+    "isBackUp": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

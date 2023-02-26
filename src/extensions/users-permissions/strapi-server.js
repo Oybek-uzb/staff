@@ -1,6 +1,7 @@
 const service = require('./service')
 const { register } = service
 const socket = require('../socket')
+// const hik = require('./hikvision')
 
 const sanitizeOutput = (user) => {
   const {

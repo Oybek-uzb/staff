@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "events",
+  "info": {
+    "singularName": "event",
+    "pluralName": "events",
+    "displayName": "event",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "employee": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employee.employee"
+    },
+    "name": {
+      "type": "string"
+    },
+    "time": {
+      "type": "datetime"
+    },
+    "currentVerifyMode": {
+      "type": "string"
+    },
+    "mask": {
+      "type": "string"
+    },
+    "pictureURL": {
+      "type": "text"
+    },
+    "major": {
+      "type": "biginteger"
+    },
+    "minor": {
+      "type": "biginteger"
+    },
+    "hash": {
+      "type": "string",
+      "unique": true
+    }
+  }
+}
