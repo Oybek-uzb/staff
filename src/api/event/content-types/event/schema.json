@@ -41,6 +41,11 @@
     "hash": {
       "type": "string",
       "unique": true
+    },
+    "hikvision": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::hikvision.hikvision"
     }
   }
 }

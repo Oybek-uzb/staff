@@ -5,13 +5,14 @@ module.exports = {
     try {
       let a = 0
       for await (const log of logs) {
-        const _hash = md5(log.serialNo + log.time + log.mask + log.currentVerifyMode + log.major + log.minor + log.name)
+        const _hash = md5(log.serialNo + log.time + log.mask + log.currentVerifyMode + log.major + log.minor + log.name + `hikvision_${log.hikvision}`)
         const _a = {
           employee: log.employeeNoString ? ((log.employeeNoString.search('emp') > -1) ? log.employeeNoString.slice(3) : log.employeeNoString)  : null,
           name: log.name,
           time: log.time,
           currentVerifyMode: log.currentVerifyMode,
           mask: log.mask,
+          hikvision: log.hikvision,
           // pictureURL: "string",
           major: log.major,
           minor: log.minor,
@@ -59,13 +60,17 @@ module.exports = {
       // console.log(_totalBackUpPage, _totalPage)
       const _page = _totalBackUpPage > _totalPage ?  0 : (_totalPage - _totalBackUpPage)
       const _backUp = _total - _page * _size
+
+      if (_list && _list.length) {
+        const __ = _list.map(e => { return { ...e, hikvision: hikvision.id } })
+        await module.exports.backUpEvents(__)
+      }
       const _hik = await strapi.entityService.update('api::hikvision.hikvision', hikvision.id, {
         data: {
           backUpCount: _backUp,
           backUpPage: _page
         }
       });
-      await module.exports.backUpEvents(_list)
       if (_page > 0) await module.exports.getEventsHikVision(_hik)
     } catch (e) {
       console.log('Back UP get with Terminal Error: ', e)
