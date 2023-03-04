@@ -248,5 +248,41 @@ module.exports = createCoreController('api::employee.employee', ({strapi}) => ({
     } catch (e) {
       return customError(ctx, e.message, 400)
     }
+  },
+  async cardAssign (ctx) {
+    const body = {...ctx.request.body}
+
+    const { employeeId, cardNo } = body
+    if (!employeeId) return customError(ctx, 'employeeId is required')
+    if (!cardNo) return customError(ctx, 'cardNo is required')
+
+    const hikvisions = await strapi.entityService.findMany('api::hikvision.hikvision');
+    const employee = await strapi.entityService.findOne('api::employee.employee', employeeId);
+    if (!employee) return customError(ctx, 'employee is not found')
+
+    const _ = {
+      CardInfo:{
+        employeeNo:`emp${employeeId}`,
+        cardNo: cardNo,
+        cardType: "normalCard"
+      }
+    }
+    try {
+      const isEdit = false
+      for await (const hik of hikvisions) {
+        const client = new DigestFetch('admin', hik.password)
+        const _url = `http://${hik.ip}/ISAPI/AccessControl/CardInfo/${isEdit ? 'Modify' : 'Record'}?format=json`
+        const _req = await client.fetch(_url, {
+          method: isEdit ? 'PUT' : 'POST',
+          body: JSON.stringify(_),
+          headers: { 'Content-Type': 'application/json' }
+        })
+        const _data = await _req.json()
+        if (_data.errorCode) return customError(ctx, _data, 400)
+      }
+      return 'success'
+    } catch (e) {
+      return customError(ctx, e, 500)
+    }
   }
 }));

@@ -35,6 +35,12 @@ module.exports = {
       path: '/employee/face/upload',
       handler: 'employee.faceUpload',
       config: {}
+    },
+    {
+      method: 'POST',
+      path: '/employee/card/assign',
+      handler: 'employee.cardAssign',
+      config: {}
     }
   ],
 };
