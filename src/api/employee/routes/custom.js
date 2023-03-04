@@ -29,6 +29,12 @@ module.exports = {
       path: '/hikvision/event/logs',
       handler: 'employee.getEventHikVisionEmployeeLogs',
       config: {}
+    },
+    {
+      method: 'POST',
+      path: '/employee/face/upload',
+      handler: 'employee.faceUpload',
+      config: {}
     }
   ],
 };

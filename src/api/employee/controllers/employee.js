@@ -228,5 +228,19 @@ module.exports = createCoreController('api::employee.employee', ({strapi}) => ({
     // } catch (e) {
     //   return customError(ctx, e, 500)
     // }
+  },
+  async faceUpload (ctx) {
+    try {
+      const { face } = ctx.request.files;
+      if (!face) return customError(ctx, `face is required in form-data`)
+      const fileIsArray = Array.isArray(face)
+      if(fileIsArray) return customError(ctx, `Multiple files are not supported. Send one file`)
+      if (!face.size && !face.name) return customError(ctx, `face is empty`)
+      const _face = await uploadStream(face, 'faces')
+      delete _face.stream
+      return _face
+    } catch (e) {
+      return customError(ctx, e.message, 400)
+    }
   }
 }));
