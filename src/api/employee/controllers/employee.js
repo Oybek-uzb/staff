@@ -36,14 +36,14 @@ module.exports = createCoreController('api::employee.employee', ({strapi}) => ({
     const body = {...ctx.request.body}
     const isEdit = ctx.request.url.search('edit') > -1
 
-    const {hikvisionId, employeeId, beginTime, endTime} = body
+    const { employeeId, beginTime, endTime} = body
 
-    if (!hikvisionId) return customError(ctx, 'hikvisionId is required')
+    // if (!hikvisions) return customError(ctx, 'hikvisions is required')
     if (!employeeId) return customError(ctx, 'employeeId is required')
 
-    const hikvision = await strapi.entityService.findOne('api::hikvision.hikvision', hikvisionId);
+    const hikvisions = await strapi.entityService.findMany('api::hikvision.hikvision');
     const employee = await strapi.entityService.findOne('api::employee.employee', employeeId);
-    if (!hikvision) return customError(ctx, 'hikvision is not found')
+    // if (!hikvision) return customError(ctx, 'hikvision is not found')
     if (!employee) return customError(ctx, 'employee is not found')
 
     const {id, firstName, lastName} = employee
@@ -56,24 +56,30 @@ module.exports = createCoreController('api::employee.employee', ({strapi}) => ({
           enable: true,
           beginTime: beginTime ? new Date(moment(beginTime).add(5, 'hours')).toISOString().slice(0, -5) : "2023-01-01T00:00:00",
           endTime: endTime ? new Date(moment(endTime).add(5, 'hours')).toISOString().slice(0, -5) : "2024-01-01T00:00:00"
-        }
+        },
+        RightPlan: [
+          { doorNo: 1, planTemplateNo: "1" }
+        ],
+        doorRight: '1'
       }
     }
     console.log(_)
     try {
-      const client = new DigestFetch('admin', hikvision.password)
-      const _url = `http://${hikvision.ip}/ISAPI/AccessControl/UserInfo/${isEdit ? 'Modify' : 'Record'}?format=json`
-      console.log(_url)
-      const _req = await client.fetch(_url, {
-        method: isEdit ? 'PUT' : 'POST',
-        body: JSON.stringify(_),
-        headers: {'Content-Type': 'application/json'}
-      })
-      const _data = await _req.json()
-      if (_data.errorCode) return customError(ctx, _data, 400)
-      await strapi.entityService.update('api::employee.employee', id, { data: { hikvision: hikvision.id } })
-      return _data
 
+      for await (const hik of hikvisions) {
+        const client = new DigestFetch('admin', hik.password)
+        const _url = `http://${hik.ip}/ISAPI/AccessControl/UserInfo/${isEdit ? 'Modify' : 'Record'}?format=json`
+        console.log(_url)
+        const _req = await client.fetch(_url, {
+          method: isEdit ? 'PUT' : 'POST',
+          body: JSON.stringify(_),
+          headers: {'Content-Type': 'application/json'}
+        })
+        const _data = await _req.json()
+        if (_data.errorCode) return customError(ctx, _data, 400)
+      }
+      await strapi.entityService.update('api::employee.employee', id, { data: { hikvisions: hikvisions.map(e => e.id) } })
+      return 'success'
     } catch (e) {
       return customError(ctx, e, 500)
     }

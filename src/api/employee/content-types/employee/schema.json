@@ -102,9 +102,9 @@
       "target": "api::computer.computer",
       "inversedBy": "employees"
     },
-    "hikvision": {
+    "hikvisions": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "oneToMany",
       "target": "api::hikvision.hikvision"
     },
     "employee_type": {
