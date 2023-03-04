@@ -6,6 +6,8 @@ module.exports = {
       let a = 0
       for await (const log of logs) {
         const _hash = md5(log.serialNo + log.time + log.mask + log.currentVerifyMode + log.major + log.minor + log.name + `hikvision_${log.hikvision}`)
+        // const empl = log.employeeNoString ? ((log.employeeNoString.search('emp') > -1) ? log.employeeNoString.slice(3) : log.employeeNoString)  : null
+        // console.log('EMP -> ',empl)
         const _a = {
           employee: log.employeeNoString ? ((log.employeeNoString.search('emp') > -1) ? log.employeeNoString.slice(3) : log.employeeNoString)  : null,
           name: log.name,

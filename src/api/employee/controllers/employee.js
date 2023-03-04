@@ -102,7 +102,7 @@ module.exports = createCoreController('api::employee.employee', ({strapi}) => ({
 
     try {
       const client = new DigestFetch('admin', employee.hikvision.password)
-      const _url = `${employee.hikvision.ip}/ISAPI/AccessControl/UserInfo/Delete?format=json`
+      const _url = `http://${employee.hikvision.ip}/ISAPI/AccessControl/UserInfo/Delete?format=json`
       const _req = await client.fetch(_url, {
         method: 'PUT',
         body: JSON.stringify(_),
@@ -189,7 +189,7 @@ module.exports = createCoreController('api::employee.employee', ({strapi}) => ({
     const data = new FormData()
 
     data.append('FaceDataRecord', `{"faceLibType":"blackFD","FDID":"1","FPID":emp${id} }`)
-    data.append('img', fs.createReadStream(_face.full_path))
+    data.append('FaceImage', fs.createReadStream(_face.full_path))
 
     // const _ = new AxiosDigestAuth({
     //   username: "admin",
@@ -214,20 +214,19 @@ module.exports = createCoreController('api::employee.employee', ({strapi}) => ({
     //   FPID: `emp${id}`
     // }));
     // _.append('FaceImage', _face.stream);
-    try {
-      const client = new DigestFetch('admin', employee.hikvision.password)
+    // try {
+      const client = new DigestFetch('admin', employee.hikvision.password, { algorithm: 'MD5' })
 
-      const _url = `${employee.hikvision.ip}/ISAPI/Intelligent/FDLib/FDSetUp?format=json`
+      const _url = `http://${employee.hikvision.ip}/ISAPI/Intelligent/FDLib/FaceDataRecord?format=json`
       const _req = await client.fetch(_url, {
-        method: 'PUT',
-        body: data,
-        headers: {'Content-Type': `multipart/form-data; boundary=${data.getBoundary()}`}
+        method: 'post',
+        body: data
       })
       const _data = await _req.json()
       if (_data.errorCode) return customError(ctx, _data, 400)
       return _data
-    } catch (e) {
-      return customError(ctx, e, 500)
-    }
+    // } catch (e) {
+    //   return customError(ctx, e, 500)
+    // }
   }
 }));
