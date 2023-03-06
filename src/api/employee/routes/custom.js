@@ -21,7 +21,7 @@ module.exports = {
     {
       method: 'POST',
       path: '/hikvision/user/face/:id',
-      handler: 'employee.setFace',
+      handler: 'employee.setFace2',
       config: {}
     },
     {

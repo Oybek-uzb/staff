@@ -12,11 +12,25 @@ const moment = require('moment')
 // const fetch = require('node-fetch')
 // const { FormData } = fetch
 const FormData = require('form-data');
+const digestUpload = require('../../../utils/digestFormUpload').digestAuthRequest
 // const axios = require('axios');
 
 
 const utils = require('../../../utils')
+const path = require("path");
 const {customError, uploadStream} = utils
+function stream2buffer(stream) {
+
+  return new Promise((resolve, reject) => {
+
+    const _buf = [];
+
+    stream.on("data", (chunk) => _buf.push(chunk));
+    stream.on("end", () => resolve(Buffer.concat(_buf)));
+    stream.on("error", (err) => reject(err));
+
+  });
+}
 
 
 module.exports = createCoreController('api::employee.employee', ({strapi}) => ({
@@ -183,49 +197,35 @@ module.exports = createCoreController('api::employee.employee', ({strapi}) => ({
     if(fileIsArray) return customError(ctx, `Multiple files are not supported. Send one file`)
 
 
-    const employee = await strapi.entityService.findOne('api::employee.employee', id, {
-      populate: '*'
-    });
-    if (!employee) return customError(ctx, 'employee is not found')
+    // const employee = await strapi.entityService.findOne('api::employee.employee', id, {
+    //   populate: '*'
+    // });
+    // if (!employee) return customError(ctx, 'employee is not found')
 
-    if (!employee.hikvision) return customError(ctx, 'employee is not hikvision user')
+    // if (!employee.hikvision) return customError(ctx, 'employee is not hikvision user')
 
     const _face = await uploadStream(file, 'faces')
 
     const data = new FormData()
 
-    data.append('FaceDataRecord', `{"faceLibType":"blackFD","FDID":"1","FPID":emp${id} }`)
-    data.append('FaceImage', fs.createReadStream(_face.full_path))
+    data.append('FaceDataRecord', `{"faceLibType":"blackFD","FDID":"1","FPID": "emp9" }`)
+    // data.append('FaceImage', fs.createReadStream(_face.full_path), {contentType: 'image/jpeg'} )
 
-    // const _ = new AxiosDigestAuth({
-    //   username: "admin",
-    //   password: "datagaze@#$"
-    // });
+    const buf = await stream2buffer(fs.createReadStream(_face.full_path))
+    console.log('BUF', buf)
+      // .then((buf) => {
+    data.append('FaceImage',buf, {contentType: 'image/jpeg'} );
 
-    // const _res = await _.request({
-    //   method: "GET",
-    //   url: "http://192.168.0.128/ISAPI/AccessControl/CardInfo/capabilities?format=json"
+      // getRequest.request(console.log, err => {
+      //   console.log(err)
+      // }, form)
     // })
-    // const _res = axios.get('http://192.168.0.128/ISAPI/AccessControl/CardInfo/capabilities?format=json', {
-    //   auth: {
-    //     username: 'admin',
-    //     password: 'datagaze@#$'
-    //   }
-    // })
-    // return _res
-    // console.log(data.getBoundary())
-    // _.append('FaceDataRecord', JSON.stringify({
-    //   faceLibType: "blackFD",
-    //   FDID: "1",
-    //   FPID: `emp${id}`
-    // }));
-    // _.append('FaceImage', _face.stream);
     // try {
-      const client = new DigestFetch('admin', employee.hikvision.password, { algorithm: 'MD5' })
+      const client = new DigestFetch('admin', 'datagaze@#$')
 
-      const _url = `http://${employee.hikvision.ip}/ISAPI/Intelligent/FDLib/FaceDataRecord?format=json`
+      const _url = `http://192.168.100.68/ISAPI/Intelligent/FDLib/FDSetUp?format=json`
       const _req = await client.fetch(_url, {
-        method: 'post',
+        method: 'put',
         body: data
       })
       const _data = await _req.json()
@@ -234,6 +234,38 @@ module.exports = createCoreController('api::employee.employee', ({strapi}) => ({
     // } catch (e) {
     //   return customError(ctx, e, 500)
     // }
+  },
+  async setFace2 (ctx) {
+    const { image } = {...ctx.request.body};
+    const { id } = ctx.request.params
+
+    if (!image) return customError(ctx, `image is require`)
+
+    const hikvisions = await strapi.entityService.findMany('api::hikvision.hikvision');
+    const employee = await strapi.entityService.findOne('api::employee.employee', id);
+    if (!employee) return customError(ctx, 'employee is not found')
+    const _uploadPath = path.resolve(strapi.dirs.static.public, `${'uploads'}`);
+    const _image_path = path.join(_uploadPath, image)
+    const buf = await stream2buffer(fs.createReadStream(_image_path))
+    const form = new FormData()
+    form.append('FaceDatasRecord', JSON.stringify({ "faceLibType": "blackFD", "FDID": "1", "FPID": `emp${id}` }));
+    form.append('FaceImage',buf, {contentType: 'image/jpeg'} );
+    try {
+      let uploaded = []
+      for await (const hik of hikvisions) {
+        const  url = `http://${hik.ip}/ISAPI/Intelligent/FDLib/FDSetUp?format=json`
+        const getRequest =  new digestUpload('PUT', url, 'admin', 'datagaze@#$')
+        const _a = await getRequest.request(succ => {
+          console.log('Success', succ)
+        }, err => {
+          console.log('error', err)
+        }, form)
+        uploaded.push(_a)
+        return uploaded
+      }
+    } catch (e) {
+      return customError(ctx, e.text, 400)
+    }
   },
   async faceUpload (ctx) {
     try {
