@@ -19,6 +19,7 @@ const digestUpload = require('../../../utils/digestFormUpload').digestAuthReques
 const utils = require('../../../utils')
 const path = require("path");
 const {customError, uploadStream} = utils
+
 function stream2buffer(stream) {
 
   return new Promise((resolve, reject) => {
@@ -50,7 +51,7 @@ module.exports = createCoreController('api::employee.employee', ({strapi}) => ({
     const body = {...ctx.request.body}
     const isEdit = ctx.request.url.search('edit') > -1
 
-    const { employeeId, beginTime, endTime} = body
+    const {employeeId, beginTime, endTime} = body
 
     // if (!hikvisions) return customError(ctx, 'hikvisions is required')
     if (!employeeId) return customError(ctx, 'employeeId is required')
@@ -72,7 +73,7 @@ module.exports = createCoreController('api::employee.employee', ({strapi}) => ({
           endTime: endTime ? new Date(moment(endTime).add(5, 'hours')).toISOString().slice(0, -5) : "2024-01-01T00:00:00"
         },
         RightPlan: [
-          { doorNo: 1, planTemplateNo: "1" }
+          {doorNo: 1, planTemplateNo: "1"}
         ],
         doorRight: '1'
       }
@@ -92,7 +93,7 @@ module.exports = createCoreController('api::employee.employee', ({strapi}) => ({
         const _data = await _req.json()
         if (_data.errorCode) return customError(ctx, _data, 400)
       }
-      await strapi.entityService.update('api::employee.employee', id, { data: { hikvisions: hikvisions.map(e => e.id) } })
+      await strapi.entityService.update('api::employee.employee', id, {data: {hikvisions: hikvisions.map(e => e.id)}})
       return 'success'
     } catch (e) {
       return customError(ctx, e, 500)
@@ -101,7 +102,7 @@ module.exports = createCoreController('api::employee.employee', ({strapi}) => ({
   async removeHikVisionEmployee(ctx) {
     const params = {...ctx.request.params}
 
-    const { id } = params
+    const {id} = params
 
     const employee = await strapi.entityService.findOne('api::employee.employee', id, {
       populate: '*'
@@ -130,7 +131,7 @@ module.exports = createCoreController('api::employee.employee', ({strapi}) => ({
       })
       const _data = await _req.json()
       if (_data.errorCode) return customError(ctx, _data, 400)
-      await strapi.entityService.update('api::employee.employee', id, { data: { hikvision: null } })
+      await strapi.entityService.update('api::employee.employee', id, {data: {hikvision: null}})
       return _data
     } catch (e) {
       return customError(ctx, e, 500)
@@ -139,7 +140,7 @@ module.exports = createCoreController('api::employee.employee', ({strapi}) => ({
   async getEventHikVisionEmployeeLogs(ctx) {
     const _query = {...ctx.query}
 
-    const { employee, offset, limit, start_date, end_date } = _query
+    const {employee, offset, limit, start_date, end_date} = _query
     if (!employee) return customError(ctx, 'employee is not found')
     const _employee = await strapi.entityService.findOne('api::employee.employee', employee, {
       populate: '*'
@@ -156,7 +157,7 @@ module.exports = createCoreController('api::employee.employee', ({strapi}) => ({
         "major": 0,
         "minor": 0,
         "startTime": `${start_date || '2022-01-01'}T00:00:00+08:00`,
-        "endTime":`${end_date || '2030-12-31'}T23:59:59+08:00`,
+        "endTime": `${end_date || '2030-12-31'}T23:59:59+08:00`,
         "maxResults": parseInt(limit) || 100,
         "employeeNoString": `emp${employee}`
       }
@@ -180,21 +181,21 @@ module.exports = createCoreController('api::employee.employee', ({strapi}) => ({
       //     populate: '*'
       //   });
       // }
-      return { data: _InfoList }
+      return {data: _InfoList}
     } catch (e) {
       return customError(ctx, e, 500)
     }
   },
-  async setFace (ctx) {
+  async setFace(ctx) {
 
     if (!ctx.request.files) return customError(ctx, `File is required`)
     //
-    const { file } = ctx.request.files;
-    const { id } = ctx.request.params
+    const {file} = ctx.request.files;
+    const {id} = ctx.request.params
 
     if (!file) return customError(ctx, `file is required in form-data`)
     const fileIsArray = Array.isArray(file)
-    if(fileIsArray) return customError(ctx, `Multiple files are not supported. Send one file`)
+    if (fileIsArray) return customError(ctx, `Multiple files are not supported. Send one file`)
 
 
     // const employee = await strapi.entityService.findOne('api::employee.employee', id, {
@@ -213,31 +214,31 @@ module.exports = createCoreController('api::employee.employee', ({strapi}) => ({
 
     const buf = await stream2buffer(fs.createReadStream(_face.full_path))
     console.log('BUF', buf)
-      // .then((buf) => {
-    data.append('FaceImage',buf, {contentType: 'image/jpeg'} );
+    // .then((buf) => {
+    data.append('FaceImage', buf, {contentType: 'image/jpeg'});
 
-      // getRequest.request(console.log, err => {
-      //   console.log(err)
-      // }, form)
+    // getRequest.request(console.log, err => {
+    //   console.log(err)
+    // }, form)
     // })
     // try {
-      const client = new DigestFetch('admin', 'datagaze@#$')
+    const client = new DigestFetch('admin', 'datagaze@#$')
 
-      const _url = `http://192.168.100.68/ISAPI/Intelligent/FDLib/FDSetUp?format=json`
-      const _req = await client.fetch(_url, {
-        method: 'put',
-        body: data
-      })
-      const _data = await _req.json()
-      if (_data.errorCode) return customError(ctx, _data, 400)
-      return _data
+    const _url = `http://192.168.100.68/ISAPI/Intelligent/FDLib/FDSetUp?format=json`
+    const _req = await client.fetch(_url, {
+      method: 'put',
+      body: data
+    })
+    const _data = await _req.json()
+    if (_data.errorCode) return customError(ctx, _data, 400)
+    return _data
     // } catch (e) {
     //   return customError(ctx, e, 500)
     // }
   },
-  async setFace2 (ctx) {
-    const { image } = {...ctx.request.body};
-    const { id } = ctx.request.params
+  async setFace2(ctx) {
+    const {image} = {...ctx.request.body};
+    const {id} = ctx.request.params
 
     if (!image) return customError(ctx, `image is require`)
 
@@ -248,14 +249,15 @@ module.exports = createCoreController('api::employee.employee', ({strapi}) => ({
     const _image_path = path.join(_uploadPath, image)
     const buf = await stream2buffer(fs.createReadStream(_image_path))
     const form = new FormData()
-    form.append('FaceDatasRecord', JSON.stringify({ "faceLibType": "blackFD", "FDID": "1", "FPID": `emp${id}` }));
-    form.append('FaceImage',buf, {contentType: 'image/jpeg'} );
+    form.append('FaceDatasRecord', JSON.stringify({"faceLibType": "blackFD", "FDID": "1", "FPID": `emp${id}`}));
+    form.append('FaceImage', buf, {contentType: 'image/jpeg'});
     try {
       let uploaded = []
       for await (const hik of hikvisions) {
-        const  url = `http://${hik.ip}/ISAPI/Intelligent/FDLib/FDSetUp?format=json`
+        console.log('HIKI', hik)
+        const url = `http://${hik.ip}/ISAPI/Intelligent/FDLib/FDSetUp?format=json`
         console.log('URLS: ', url)
-        const getRequest =  new digestUpload('PUT', url, 'admin', 'datagaze@#$')
+        const getRequest = new digestUpload('PUT', url, 'admin', 'datagaze@#$')
         const _a = await getRequest.request(succ => {
           console.log('Success', succ)
         }, err => {
@@ -265,18 +267,18 @@ module.exports = createCoreController('api::employee.employee', ({strapi}) => ({
           hikvision: hik.ip,
           data: _a
         })
-        return uploaded
       }
+      return uploaded
     } catch (e) {
       return customError(ctx, e.text, 400)
     }
   },
-  async faceUpload (ctx) {
+  async faceUpload(ctx) {
     try {
-      const { face } = ctx.request.files;
+      const {face} = ctx.request.files;
       if (!face) return customError(ctx, `face is required in form-data`)
       const fileIsArray = Array.isArray(face)
-      if(fileIsArray) return customError(ctx, `Multiple files are not supported. Send one file`)
+      if (fileIsArray) return customError(ctx, `Multiple files are not supported. Send one file`)
       if (!face.size && !face.name) return customError(ctx, `face is empty`)
       const _face = await uploadStream(face, 'faces')
       delete _face.stream
@@ -285,10 +287,10 @@ module.exports = createCoreController('api::employee.employee', ({strapi}) => ({
       return customError(ctx, e.message, 400)
     }
   },
-  async cardAssign (ctx) {
+  async cardAssign(ctx) {
     const body = {...ctx.request.body}
 
-    const { employeeId, cardNo } = body
+    const {employeeId, cardNo} = body
     if (!employeeId) return customError(ctx, 'employeeId is required')
     if (!cardNo) return customError(ctx, 'cardNo is required')
 
@@ -297,8 +299,8 @@ module.exports = createCoreController('api::employee.employee', ({strapi}) => ({
     if (!employee) return customError(ctx, 'employee is not found')
 
     const _ = {
-      CardInfo:{
-        employeeNo:`emp${employeeId}`,
+      CardInfo: {
+        employeeNo: `emp${employeeId}`,
         cardNo: cardNo,
         cardType: "normalCard"
       }
@@ -311,7 +313,7 @@ module.exports = createCoreController('api::employee.employee', ({strapi}) => ({
         const _req = await client.fetch(_url, {
           method: isEdit ? 'PUT' : 'POST',
           body: JSON.stringify(_),
-          headers: { 'Content-Type': 'application/json' }
+          headers: {'Content-Type': 'application/json'}
         })
         const _data = await _req.json()
         if (_data.errorCode) return customError(ctx, _data, 400)
