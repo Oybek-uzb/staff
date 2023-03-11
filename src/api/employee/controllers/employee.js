@@ -254,13 +254,17 @@ module.exports = createCoreController('api::employee.employee', ({strapi}) => ({
       let uploaded = []
       for await (const hik of hikvisions) {
         const  url = `http://${hik.ip}/ISAPI/Intelligent/FDLib/FDSetUp?format=json`
+        console.log('URLS: ', url)
         const getRequest =  new digestUpload('PUT', url, 'admin', 'datagaze@#$')
         const _a = await getRequest.request(succ => {
           console.log('Success', succ)
         }, err => {
           console.log('error', err)
         }, form)
-        uploaded.push(_a)
+        uploaded.push({
+          hikvision: hik.ip,
+          data: _a
+        })
         return uploaded
       }
     } catch (e) {
