@@ -4,7 +4,8 @@
   "info": {
     "singularName": "translation",
     "pluralName": "translations",
-    "displayName": "translation"
+    "displayName": "translation",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -12,7 +13,8 @@
   "pluginOptions": {},
   "attributes": {
     "key": {
-      "type": "string"
+      "type": "string",
+      "unique": true
     },
     "en": {
       "type": "text"
