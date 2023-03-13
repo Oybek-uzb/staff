@@ -19,6 +19,13 @@ module.exports = createCoreController('api::translation.translation', ({strapi})
       const {id} = _params
       const res = await strapi.service('api::translation.translation').findOne(id, _query)
       return res
+    },
+    async getByLang (ctx) {
+      const _params = {...ctx.params}
+      const { lang } = _params
+      const entries = await strapi.entityService.findMany('api::translation.translation', {});
+      return entries.reduce((a, v) => ({ ...a, [v.key]: v[lang]}), {})
+      // return entries
     }
   }
 ))
