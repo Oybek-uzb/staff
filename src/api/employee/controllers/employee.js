@@ -8,12 +8,8 @@ const {createCoreController} = require('@strapi/strapi').factories;
 const DigestFetch = require('digest-fetch')
 const fs = require('fs')
 const moment = require('moment')
-// const AxiosDigestAuth = require('@mhoc/axios-digest-auth').default
-// const fetch = require('node-fetch')
-// const { FormData } = fetch
 const FormData = require('form-data');
 const digestUpload = require('../../../utils/digestFormUpload').digestAuthRequest
-// const axios = require('axios');
 
 
 const utils = require('../../../utils')
@@ -321,6 +317,20 @@ module.exports = createCoreController('api::employee.employee', ({strapi}) => ({
       return 'success'
     } catch (e) {
       return customError(ctx, e, 500)
+    }
+  },
+  async dashboardStats (ctx) {
+    try {
+      const employees = await strapi.db.query('api::employee.employee').count()
+      const computers = await strapi.db.query('api::computer.computer').count()
+      const incidents = await strapi.db.query('api::incident.incident').count()
+      return {
+        employees,
+        computers,
+        incidents
+      }
+    } catch (e) {
+      return customError(ctx, e.message, 400)
     }
   }
 }));

@@ -41,6 +41,12 @@ module.exports = {
       path: '/employee/card/assign',
       handler: 'employee.cardAssign',
       config: {}
-    }
+    },
+    {
+      method: 'GET',
+      path: '/dashboards/home/stats',
+      handler: 'employee.dashboardStats',
+      config: {}
+    },
   ],
 };
