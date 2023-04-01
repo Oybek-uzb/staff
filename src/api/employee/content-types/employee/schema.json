@@ -122,6 +122,9 @@
     },
     "address": {
       "type": "string"
+    },
+    "userName": {
+      "type": "string"
     }
   }
 }
