@@ -32,8 +32,8 @@ module.exports = createCoreController('api::computer.computer', ({strapi}) => ({
       if (!PCName) return customError(ctx, 'PCName is required')
       // if(!HostName) return ctx.badRequest(null, { message: 'HostName is required' })
       // if(!GivenName) return ctx.badRequest(null, { message: 'GivenName is required' })
-      if (!SureName) return customError(ctx, 'SureName is required')
-      if (!InDomain) return customError(ctx, 'InDomain is required')
+      // if (!SureName) return customError(ctx, 'SureName is required')
+      // if (!InDomain) return customError(ctx, 'InDomain is required')
       if (typeof InDomain !== 'boolean') return customError(ctx, 'InDomain is boolean')
       if (!Mac) return customError(ctx, 'Mac is required')
       if (!IP) return customError(ctx, 'IP is required')
@@ -57,7 +57,7 @@ module.exports = createCoreController('api::computer.computer', ({strapi}) => ({
         _employee = await strapi.entityService.update('api::employee.employee', employee[0].id, {
           data: {
             firstName: GivenName,
-            lastName: SureName,
+            lastName: SureName || '',
             hostname: HostName,
             inDomain: InDomain,
             token: _token
