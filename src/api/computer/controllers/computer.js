@@ -25,19 +25,20 @@ module.exports = createCoreController('api::computer.computer', ({strapi}) => ({
     },
     async clientCreate(ctx) {
       const body = {...ctx.request.body}
-      const {PCID, UserID, PCName, HostName, GivenName, SureName, InDomain, Mac, IP, OS, Version} = body
+      const {PCID, UserID, PCName, HostName, GivenName, SureName, InDomain, Mac, IP, OS, Version, UserName} = body
 
       if (!PCID) return customError(ctx, 'PCID is required')
       if (!UserID) return customError(ctx, 'UserID is required')
       if (!PCName) return customError(ctx, 'PCName is required')
       if(!HostName) return ctx.badRequest(null, { message: 'HostName is required' })
       if(!GivenName) return ctx.badRequest(null, { message: 'GivenName is required' })
+      if(!UserName) return ctx.badRequest(null, { message: 'UserName is required' })
       // if (!SureName) return customError(ctx, 'SureName is required')
       // if (!InDomain) return customError(ctx, 'InDomain is required')
       if (typeof InDomain !== 'boolean') return customError(ctx, 'InDomain is boolean')
       if (!Mac) return customError(ctx, 'Mac is required')
       if (!IP) return customError(ctx, 'IP is required')
-      // if(!8192OS) return ctx.badRequest(null, { message: 'OS is required' })
+      // if(!OS) return ctx.badRequest(null, { message: 'OS is required' })
       if (!Version) return customError(ctx, 'Version is required')
 
 

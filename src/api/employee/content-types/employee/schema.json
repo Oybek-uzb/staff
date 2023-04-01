@@ -123,7 +123,7 @@
     "address": {
       "type": "string"
     },
-    "userName": {
+    "UserName": {
       "type": "string"
     }
   }
