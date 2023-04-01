@@ -61,6 +61,7 @@ module.exports = createCoreController('api::computer.computer', ({strapi}) => ({
             lastName: SureName || '',
             hostname: HostName,
             inDomain: InDomain,
+            UserName: UserName,
             token: _token
           },
         });
@@ -72,6 +73,7 @@ module.exports = createCoreController('api::computer.computer', ({strapi}) => ({
             lastName: SureName,
             hostname: HostName,
             userID: UserID,
+            UserName: UserName,
             inDomain: InDomain
           }
         })
