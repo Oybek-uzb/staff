@@ -31,7 +31,7 @@ module.exports = createCoreController('api::computer.computer', ({strapi}) => ({
       if (!UserID) return customError(ctx, 'UserID is required')
       if (!PCName) return customError(ctx, 'PCName is required')
       if(!HostName) return ctx.badRequest(null, { message: 'HostName is required' })
-      if(!GivenName) return ctx.badRequest(null, { message: 'GivenName is required' })
+      // if(!GivenName) return ctx.badRequest(null, { message: 'GivenName is required' })
       if(!UserName) return ctx.badRequest(null, { message: 'UserName is required' })
       // if (!SureName) return customError(ctx, 'SureName is required')
       // if (!InDomain) return customError(ctx, 'InDomain is required')
