@@ -7,7 +7,7 @@ const moment = require("moment");
  */
 
 const { createCoreController } = require('@strapi/strapi').factories;
-
+const { sql, sql2 } = require('./sql')
 
 const groupBy = function (array) {
 
@@ -79,6 +79,15 @@ module.exports = createCoreController('api::event.event', ({strapi}) => ({
       //   console.log(index, element);
       // }
       // return map
+    },
+    async attendances_v2 (ctx) {
+      const _query = { ...ctx.query }
+      const { date, company, employee } = _query
+      if (!date) return customError(ctx, 'date must be required in query')
+      if (!company) return customError(ctx, 'company id must be required in query')
+      const query = sql2(date, company, employee)
+      const { rows } = await strapi.db.connection.raw(query)
+      return rows
     }
   }
 ))

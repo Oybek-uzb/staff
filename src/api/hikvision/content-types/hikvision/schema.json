@@ -18,9 +18,6 @@
     "name": {
       "type": "string"
     },
-    "uuid": {
-      "type": "string"
-    },
     "company": {
       "type": "relation",
       "relation": "oneToOne",
@@ -48,6 +45,9 @@
     "isBackUp": {
       "type": "boolean",
       "default": false
+    },
+    "type": {
+      "type": "string"
     }
   }
 }

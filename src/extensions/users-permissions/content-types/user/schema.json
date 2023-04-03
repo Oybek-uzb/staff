@@ -83,7 +83,7 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::company.company",
-      "inversedBy": "user"
+      "mappedBy": "user"
     }
   }
 }
