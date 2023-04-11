@@ -12,19 +12,22 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "activeWindowName": {
-      "type": "text"
-    },
     "employee": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::employee.employee"
     },
-    "imageUrl": {
-      "type": "text"
-    },
     "dateTime": {
       "type": "datetime"
+    },
+    "ScreenName": {
+      "type": "string"
+    },
+    "Title": {
+      "type": "text"
+    },
+    "Screenshot": {
+      "type": "text"
     }
   }
 }

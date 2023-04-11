@@ -81,7 +81,7 @@ async function uploadStream(file, folder) {
 
         _file.url = `/${folder}/${_file_hash}`;
         _file.full_path = path.join(_uploadPath, _file_hash);
-        resolve(_file);
+        resolve(_file.url);
       }
     );
   });
