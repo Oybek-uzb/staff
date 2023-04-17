@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "employee_families",
+  "info": {
+    "singularName": "employee-family",
+    "pluralName": "employee-families",
+    "displayName": "EmployeeFamily",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "birthDate": {
+      "type": "datetime"
+    },
+    "surname": {
+      "type": "string"
+    },
+    "relation": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employee-family-relation.employee-family-relation"
+    }
+  }
+}

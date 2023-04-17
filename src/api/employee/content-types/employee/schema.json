@@ -125,6 +125,12 @@
     },
     "UserName": {
       "type": "string"
+    },
+    "employeeCV": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employee-cv.employee-cv",
+      "inversedBy": "employee"
     }
   }
 }

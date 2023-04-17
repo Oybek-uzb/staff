@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "employee_graduations",
+  "info": {
+    "singularName": "employee-graduation",
+    "pluralName": "employee-graduations",
+    "displayName": "EmployeeGraduation"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    }
+  }
+}

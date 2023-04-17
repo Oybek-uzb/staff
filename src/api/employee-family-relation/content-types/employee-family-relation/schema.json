@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "employee_family_relations",
+  "info": {
+    "singularName": "employee-family-relation",
+    "pluralName": "employee-family-relations",
+    "displayName": "EmployeeFamilyRelation"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    }
+  }
+}

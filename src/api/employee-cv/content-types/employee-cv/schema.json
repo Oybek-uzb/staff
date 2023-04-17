@@ -1,0 +1,74 @@
+{
+  "kind": "collectionType",
+  "collectionName": "employee_cvs",
+  "info": {
+    "singularName": "employee-cv",
+    "pluralName": "employee-cvs",
+    "displayName": "EmployeeCV",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "surename": {
+      "type": "string"
+    },
+    "gender": {
+      "type": "enumeration",
+      "enum": [
+        "male",
+        "female"
+      ]
+    },
+    "birthDate": {
+      "type": "datetime"
+    },
+    "birthAddress": {
+      "type": "text"
+    },
+    "address": {
+      "type": "text"
+    },
+    "citizenship": {
+      "type": "string"
+    },
+    "graduation": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employee-graduation.employee-graduation"
+    },
+    "family": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::employee-family.employee-family"
+    },
+    "language": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::language-level.language-level",
+      "inversedBy": "employeeCV"
+    },
+    "education": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::education.education"
+    },
+    "experience": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::experience.experience",
+      "inversedBy": "employeeCV"
+    },
+    "employee": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employee.employee",
+      "mappedBy": "employeeCV"
+    }
+  }
+}

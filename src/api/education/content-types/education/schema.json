@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "educations",
+  "info": {
+    "singularName": "education",
+    "pluralName": "educations",
+    "displayName": "EmployeeEducation",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": false
+    },
+    "address": {
+      "type": "string",
+      "required": false
+    },
+    "faculty": {
+      "type": "string"
+    },
+    "yearOfAdmission": {
+      "type": "datetime"
+    },
+    "yearOfGraduation": {
+      "type": "datetime"
+    },
+    "isUncompleted": {
+      "type": "boolean"
+    },
+    "courseNumber": {
+      "type": "integer"
+    },
+    "profession": {
+      "type": "string"
+    },
+    "diplomaNumber": {
+      "type": "string"
+    }
+  }
+}

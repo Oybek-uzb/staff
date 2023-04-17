@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "language_levels",
+  "info": {
+    "singularName": "language-level",
+    "pluralName": "language-levels",
+    "displayName": "EmployeeLanguageLevel",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "language": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::language.language"
+    },
+    "level": {
+      "type": "integer"
+    },
+    "employeeCV": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::employee-cv.employee-cv",
+      "mappedBy": "language"
+    }
+  }
+}
