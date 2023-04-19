@@ -5,7 +5,7 @@
       "description": "Development server"
     },
     {
-      "url": "http://128.199.195.39:1337/api",
+      "url": "https://staff.datagaze-lab.uz/api",
       "description": "Prod server"
     }
   ]
