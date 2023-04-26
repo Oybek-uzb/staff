@@ -40,6 +40,12 @@
     },
     "diplomaNumber": {
       "type": "string"
+    },
+    "employeeCV": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::employee-cv.employee-cv",
+      "inversedBy": "education"
     }
   }
 }

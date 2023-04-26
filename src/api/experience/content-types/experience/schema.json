@@ -29,9 +29,9 @@
     },
     "employeeCV": {
       "type": "relation",
-      "relation": "manyToMany",
+      "relation": "manyToOne",
       "target": "api::employee-cv.employee-cv",
-      "mappedBy": "experience"
+      "inversedBy": "experience"
     }
   }
 }

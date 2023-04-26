@@ -40,12 +40,14 @@
     "graduation": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::employee-graduation.employee-graduation"
+      "target": "api::employee-graduation.employee-graduation",
+      "inversedBy": "employeeCV"
     },
     "family": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::employee-family.employee-family"
+      "target": "api::employee-family.employee-family",
+      "mappedBy": "employeeCV"
     },
     "language": {
       "type": "relation",
@@ -56,18 +58,31 @@
     "education": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::education.education"
+      "target": "api::education.education",
+      "mappedBy": "employeeCV"
     },
     "experience": {
       "type": "relation",
-      "relation": "manyToMany",
+      "relation": "oneToMany",
       "target": "api::experience.experience",
-      "inversedBy": "employeeCV"
+      "mappedBy": "employeeCV"
     },
     "employee": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::employee.employee",
+      "mappedBy": "employeeCV"
+    },
+    "employeeArmy": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::employee-army.employee-army",
+      "mappedBy": "employeeCV"
+    },
+    "employeeTravel": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::employee-travel.employee-travel",
       "mappedBy": "employeeCV"
     }
   }

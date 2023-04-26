@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "employee_armies",
+  "info": {
+    "singularName": "employee-army",
+    "pluralName": "employee-armies",
+    "displayName": "EmployeeArmy",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "organAddress": {
+      "type": "string"
+    },
+    "organName": {
+      "type": "text"
+    },
+    "chosenAs": {
+      "type": "string"
+    },
+    "electionDate": {
+      "type": "datetime"
+    },
+    "disposalDate": {
+      "type": "datetime"
+    },
+    "employeeCV": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::employee-cv.employee-cv",
+      "inversedBy": "employeeArmy"
+    }
+  }
+}
