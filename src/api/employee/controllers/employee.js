@@ -57,6 +57,8 @@ module.exports = createCoreController('api::employee.employee', ({strapi}) => ({
     // if (!hikvision) return customError(ctx, 'hikvision is not found')
     if (!employee) return customError(ctx, 'employee is not found')
 
+    const currentYear = new Date().getFullYear()
+
     const {id, firstName, lastName} = employee
     const _ = {
       UserInfo: {
@@ -65,8 +67,8 @@ module.exports = createCoreController('api::employee.employee', ({strapi}) => ({
         userType: "normal",
         Valid: {
           enable: true,
-          beginTime: beginTime ? new Date(moment(beginTime).add(5, 'hours')).toISOString().slice(0, -5) : "2023-01-01T00:00:00",
-          endTime: endTime ? new Date(moment(endTime).add(5, 'hours')).toISOString().slice(0, -5) : "2024-01-01T00:00:00"
+          beginTime: beginTime ? new Date(moment(beginTime).add(5, 'hours')).toISOString().slice(0, -5) : `${currentYear}-01-01T00:00:00`,
+          endTime: endTime ? new Date(moment(endTime).add(5, 'hours')).toISOString().slice(0, -5) : `${currentYear+10}-01-01T00:00:00`
         },
         RightPlan: [
           {doorNo: 1, planTemplateNo: "1"}
